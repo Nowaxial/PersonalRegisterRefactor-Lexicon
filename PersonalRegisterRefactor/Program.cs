@@ -14,12 +14,13 @@ namespace PersonalRegisterRefactor
 
             do
             {
-
+                Console.WriteLine("----------------------");
                 Console.WriteLine("Register Employee");
                 Console.WriteLine("----------------------");
                 Console.WriteLine("1. Add employee");
                 Console.WriteLine("2. List employees");
                 Console.WriteLine("Q. Exit");
+                Console.WriteLine("----------------------");
                 Console.Write("Choose a option: ");
 
                 string chosenInput = Console.ReadLine()!.ToUpperInvariant();
@@ -46,7 +47,21 @@ namespace PersonalRegisterRefactor
 
         private static void ShowAllEmployees()
         {
-            
+
+            if (payroll.GetEmployees().GetEnumerator().MoveNext())
+            {
+                Console.WriteLine("Employees: ");
+                Console.WriteLine("----------------------");
+                foreach (var employee in payroll.GetEmployees())
+                {
+                    Console.WriteLine($"Name: {employee.FirstName} {employee.LastName} | Salary: {employee.Salary}kr");
+                    Console.WriteLine("----------------------");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No employees registered");
+            }
         }
 
         private static void AddEmployee()
